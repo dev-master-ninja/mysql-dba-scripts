@@ -1,8 +1,8 @@
 # MySQL DBA Scripts
 
 ## DISCLAIMER
-> The scripts in this repository come with **absolutely no warranty**. The scripts are purely designed and intended for instructional purposes. 
-> Any damage or loss of data when implementing these scripts is the sole resposibility of the user of these scripts. 
+> The scripts in this repository come with **absolutely no warranty**. The scripts are purely designed and intended for **instructional purposes only**. 
+> Any damage or loss of data when implementing these scripts is the **sole responsibility of the user of these scripts**. 
 
 
 ## XAMPP 
