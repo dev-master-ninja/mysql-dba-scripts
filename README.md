@@ -70,6 +70,5 @@ Execute following commands (as root user, or with sudo if possible)
 see documentation [here](./replication/mysqld-modifications.md)
 
 ## Cluster
-Installing a MySQL Cluster on Linux (Ubuntu and RedHat)
-documentation and setup guide [here](./cluster/README.md)
+Installing a MySQL Cluster on Linux ([Ubuntu](./cluster/README-ubuntu.md) and [RedHat](./cluster/README-redhat.md)) documentation and setup guide [here](./cluster/README.md)
 
