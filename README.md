@@ -3,6 +3,7 @@
 ## DISCLAIMER
 > The scripts in this repository come with **absolutely no warranty**. The scripts are purely designed and intended for **instructional purposes only**. 
 > Any damage or loss of data when implementing these scripts is the **sole responsibility of the user of these scripts**. 
+> By cloning/downloading and using this repository you agree with above notice.
 
 
 ## XAMPP 
