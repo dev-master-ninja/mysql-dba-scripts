@@ -14,12 +14,12 @@ Information: https://galeracluster.com/
 
 ## Preparation
 
-The first steps are optional. 
+The first three steps are optional, adjust them to your local systems if needed, or when you run into trouble:
 1. [Disabling SELinux for mysqld](#optional-disabling-selinux-for-mysqld)
 2. [Firewall Configuration](#optional-firewall-configuration)
 3. [Disabling AppArmor](#optional-disabling-apparmor)
 
-### (optional) Disabling SELinux for mysqld
+### 1. (optional) Disabling SELinux for mysqld
 If SELinux (Security-Enhanced Linux) is enabled on the servers, it may block `mysqld` from performing required operations. You must either disable SELinux for `mysqld` or configure it to allow `mysqld` to run external programs and open listen sockets on unprivileged ports—that is, operations that an unprivileged user may do.
 To disable SELinux for `mysqld`, execute the following from the command-line: 
 ```
