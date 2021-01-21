@@ -9,6 +9,7 @@ I've adapted this [original post](https://www.digitalocean.com/community/tutoria
 ## Platform specific
 1. Install on [Ubuntu](./README-ubuntu.md)
 2. Install on [RedHat](./README-redhat.md)
+3. Install [Galera Cluster Manager](./README-galera.md)
 
 ## Migration
 1. Migration [guide](./README-migration.md)

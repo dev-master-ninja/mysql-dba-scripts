@@ -70,4 +70,5 @@ see documentation [here](./replication/mysqld-modifications.md)
 
 ## Cluster
 Installing a MySQL Cluster on Linux ([Ubuntu](./cluster/README-ubuntu.md) and [RedHat](./cluster/README-redhat.md)) documentation and setup guide [here](./cluster/README.md)
-
+  
+UPDATE: Added detailed installation instructions for [Galera Clustmanager](./cluster/README-galera.md)

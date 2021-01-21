@@ -5,6 +5,7 @@ I've adapted this [original post](https://www.digitalocean.com/community/tutoria
 ## Architecture
 <img src="architecture.png">
 
+> Warning The IP addresses in  the example are for demonstration purposes only. Use the real values from your nodes and netmask in the iptables configuration for your cluster.
 
 
 > **Note:** Login as `root` on the specified systems. 

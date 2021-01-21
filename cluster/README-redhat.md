@@ -8,6 +8,9 @@
 ## Architecture
 <img src="architecture.png">
 
+> Warning The IP addresses in the example are for demonstration purposes only. Use the real values from your nodes and netmask in the iptables configuration for your cluster.
+
+
 ## 1 — Installing the infrastructure
 We’ll first begin by downloading and installing the MySQL Cluster Manager, `ndb_mgmd`
 To install the Cluster Manager, we first need to fetch the appropriate .deb installer file from the the official [MySQL Cluster download page](http://dev.mysql.com/downloads/cluster/).
