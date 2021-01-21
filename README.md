@@ -57,13 +57,15 @@ Save file and exit.
 
 ## Completely remove MySQL on Ubuntu servers
 Execute following commands (as root user, or with sudo if possible)
-- apt remove --purge mysql-server
-- apt purge mysql-server
-- apt autoremove
-- apt autoclean
-- apt remove dbconfig-mysql
-- apt install mysql-server
+````
+apt remove --purge mysql-server
+apt purge mysql-server
+apt autoremove
+apt autoclean
+apt remove dbconfig-mysql
 
+apt install mysql-server
+````
 
 ## Replication
 see documentation [here](./replication/mysqld-modifications.md)
@@ -72,3 +74,6 @@ see documentation [here](./replication/mysqld-modifications.md)
 Installing a MySQL Cluster on Linux ([Ubuntu](./cluster/README-ubuntu.md) and [RedHat](./cluster/README-redhat.md)) documentation and setup guide [here](./cluster/README.md)
   
 UPDATE: Added detailed installation instructions for [Galera Clustmanager](./cluster/README-galera.md)
+
+## Upgrading to MySQL 8
+How to upgrade to [MySQL 8](./mysql-8/README.md)

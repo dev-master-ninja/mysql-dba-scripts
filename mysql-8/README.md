@@ -2,8 +2,8 @@
 
 ## 1 - Install MySQL 8 on your specific platform
 1. [Ubuntu / Debian Systems](#ubuntu-install)
-2. RedHat Systems
-3. Install MySQL Server
+2. [RedHat Systems](#redhat-install)
+3. [Install MySQL Server](#install-mysql-server)
 
 ## Ubuntu Install
 
