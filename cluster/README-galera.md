@@ -1,11 +1,11 @@
 # Install Galera Cluster Manager
 
-## Credit where credit is due:
+## Credit where credit is due
 > **BIG SHOUT OUT** This *README* is adapted from the official and original documentation found on [Installing Galera Cluster](https://galeracluster.com/library/training/tutorials/galera-installation.html). Other information about Galera Cluster can be found on the original website: https://galeracluster.com/
 
 ## DISCLAIMER
 > The scripts and commands in this repository come with **absolutely no warranty**. This information is purely designed and intended for **instructional purposes only**. 
-Any damage or loss of data when implementing these commands and scripts is the **sole responsibility of the user of these scripts**.      
+Any damage or loss of data when implementing these commands and scripts is the **sole responsibility of the user of the information listed here**.      
 
 ## Architecture
 <img src="architecture.png">
