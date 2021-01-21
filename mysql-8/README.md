@@ -1,11 +1,11 @@
 # Migrating to MySQL 8
 
 ## 1 - Install MySQL 8 on your specific platform
-1. Ubuntu / Debian Systems
+1. [Ubuntu / Debian Systems](#ubuntu-install)
 2. RedHat Systems
+3. Install MySQL Server
 
-
-### Ubuntu Install
+## Ubuntu Install
 
 First make sure you have the latest patches and package repositories installed and if required, reboot your server: 
 
@@ -49,10 +49,15 @@ apt-key adv --keyserver keys.gnupg.net --recv-keys 8C718D3B5072E1F5
 ````
 This might take a while. You need the specific repository validated, otherwise the system will install MySQL 5.7 instead of version 8.
 
-### Install MySQL Server
+## RedHat install
+bla bla
+
+
+## Install MySQL Server
 To install MySQL run: 
 ```
-$ (sudo) apt-get install mysql-server
+$ (sudo) apt-get install mysql-server (ubuntu)
+$ (sudo) yum install mysql-server (redhat)
 ```
 apt will look at all available mysql-server packages and determine that the MySQL provided package is the newest and best candidate. It will then calculate package dependencies and ask you to approve the installation. Type y then ENTER. The software will install.
 
