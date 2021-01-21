@@ -11,6 +11,12 @@ Information: https://galeracluster.com/
 
 ## Step by Step installation guide (platform independent)
 
+
+## Preparation
+
+The first steps are optional. 
+1. [Disabling SELinux for mysqld](###optional-disabling-selinux-for-mysql)
+
 ### (optional) Disabling SELinux for mysqld
 If SELinux (Security-Enhanced Linux) is enabled on the servers, it may block `mysqld` from performing required operations. You must either disable SELinux for `mysqld` or configure it to allow `mysqld` to run external programs and open listen sockets on unprivileged ports—that is, operations that an unprivileged user may do.
 To disable SELinux for `mysqld`, execute the following from the command-line: 
@@ -54,3 +60,5 @@ If instead, your system uses systemd, run the following command instead:
 ````
 $ sudo systemctl restart apparmor
 ````
+
+## Installing Galera Cluster
