@@ -134,3 +134,7 @@ Threads: 2  Questions: 8  Slow queries: 0  Opens: 643  Flush tables: 4  Open tab
 ````
 
 ## 2 - Database Migration
+Import your mysqldump exports directly into your new database:
+```bash
+mysql -u [user] -p[password] < data.sql
+```
