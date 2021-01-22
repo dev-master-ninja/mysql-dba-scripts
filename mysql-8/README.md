@@ -49,8 +49,6 @@ apt-key adv --keyserver keys.gnupg.net --recv-keys 8C718D3B5072E1F5
 ````
 This might take a while. You need the specific repository validated, otherwise the system will install MySQL 5.7 instead of version 8.
 
-## RedHat install
-bla bla
 
 
 ## Install MySQL Server
