@@ -1,5 +1,11 @@
 # Partition Tables
 
+Partitioning is the redistribution of data according to the content of the data. Partionining ensures that specific datasets stay in their range when queried so the number of rows queried is drastically reduced. 
+
+
+<img src="./partioning.png">
+
+
 On MySQL 5.x check if partitioning is enable by executing following SQL statement: 
 
 ````
@@ -200,9 +206,7 @@ CREATE TABLE ts (
 This is only feasible with extremely large tables.
 
 ## Adding tablespaces to partitions
-Partitions can be `striped` over several tablespaces. Usually this is done to increase read/write throughput. If diskstorage is a RAID-5 SAN or NAS system, this can increase the query performance of very large tables: 
-
-<img src="./partioning.png">
+Partitions can be `striped` over several tablespaces. Usually this is done to increase read/write throughput. If diskstorage is a RAID-5 SAN or NAS system, this can increase the query performance of very large tables.
 
 Consider the RANGE partition in the first example, striped over 4 tablespaces: 
 
