@@ -63,7 +63,7 @@ CREATE TABLE employees_range (
     hired DATE NOT NULL DEFAULT '1970-01-01',
     separated DATE NOT NULL DEFAULT '2021-12-31',
     job_code INT NOT NULL,
-    store_id INT NOT NULL,
+    store_id INT NOT NULL
 )
 PARTITION BY RANGE (store_id) (
     PARTITION p0 VALUES LESS THAN (6),
@@ -199,8 +199,48 @@ CREATE TABLE ts (
 ```    
 This is only feasible with extremely large tables.
 
+## Adding tablespaces to partitions
+Partitions can be `striped` over several tablespaces. Usually this is done to increase read/write throughput. If diskstorage is a RAID-5 SAN or NAS system, this can increase the query performance of very large tables: 
+
+<img src="./partioning.png">
+
+Consider the RANGE partition in the first example, striped over 4 tablespaces: 
+
+```
+drop tablespace data0101;
+drop tablespace data0102;
+drop tablespace data0103;
+drop tablespace data0104;
+drop tablespace data0105;
+
+create tablespace data0101 add datafile 'data0101.ibd';
+create tablespace data0102 add datafile 'data0102.ibd';
+create tablespace data0103 add datafile 'data0103.ibd';
+create tablespace data0104 add datafile 'data0104.ibd';
+create tablespace data0104 add datafile 'data0105.ibd';
+
+CREATE TABLE employees_ts_range (
+    id INT NOT NULL,
+    fname VARCHAR(30),
+    lname VARCHAR(30),
+    hired DATE NOT NULL DEFAULT '1970-01-01',
+    separated DATE NOT NULL DEFAULT '2021-12-31',
+    job_code INT NOT NULL,
+    store_id INT NOT NULL,
+    primary key(id)
+)
+PARTITION BY RANGE (id) (
+    PARTITION p0 VALUES LESS THAN (10000) tablespace data0101,
+    PARTITION p1 VALUES LESS THAN (20000) tablespace data0102,
+    PARTITION p2 VALUES LESS THAN (30000) tablespace data0103,
+    PARTITION p3 VALUES LESS THAN (40000) tablespace data0104,
+    PARTITION p3 VALUES LESS THAN (50000)tablespace data0104
+);
+```
+
 ## Find partitions
 ```
 select * from information_schema.partitions  
 where table_schema = '[DATABASE]'
 ```
+
