@@ -114,3 +114,9 @@ In our case: http://server-f.dba-training.online:8081
 
 User: root
 Password: mypass123
+
+you can log in to a container with: 
+```bash
+$ docker exec -it [CONTAINER] /bin/bash
+```
+Where `[CONTAINER]` is the name of your container.
