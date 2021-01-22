@@ -81,7 +81,7 @@ PARTITION BY RANGE (store_id) (
 This will produce an error when a value with `store_id = 21` is inserted.
 Add a new partition: 
 ```
-alter table employees ADD PARTITION (PARTITION p4 values LESS THAN MAXVALUE);
+alter table employees_range ADD PARTITION (PARTITION p4 values LESS THAN MAXVALUE);
 ```
 
 
