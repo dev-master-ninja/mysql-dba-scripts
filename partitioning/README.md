@@ -53,12 +53,12 @@ This type of partitioning assigns rows to partitions based on column values fall
 
 Example: 
 ```
-CREATE TABLE employees (
+CREATE TABLE employees_range (
     id INT NOT NULL,
     fname VARCHAR(30),
     lname VARCHAR(30),
     hired DATE NOT NULL DEFAULT '1970-01-01',
-    separated DATE NOT NULL DEFAULT '9999-12-31',
+    separated DATE NOT NULL DEFAULT '2021-12-31',
     job_code INT NOT NULL,
     store_id INT NOT NULL
 )
@@ -93,9 +93,85 @@ Example:
 <tr><td>South</td><td>7, 8, 15, 16</td></tr>
 </tbody>
 </table>
+The table definition could be: 
+````
+CREATE TABLE employees_list (
+    id INT NOT NULL,
+    fname VARCHAR(30),
+    lname VARCHAR(30),
+    hired DATE NOT NULL DEFAULT '1970-01-01',
+    separated DATE NOT NULL DEFAULT '2050-12-31',
+    job_code INT,
+    store_id INT
+)
+PARTITION BY LIST(store_id) (
+    PARTITION pNorth VALUES IN (3,5,6,9,17),
+    PARTITION pEast VALUES IN (1,2,10,11,19,20),
+    PARTITION pWest VALUES IN (4,12,13,14,18),
+    PARTITION pCentral VALUES IN (7,8,15,16)
+);
+````
 
 ### HASH partitioning
-With this type of partitioning, a partition is selected based on the value returned by a user-defined expression that operates on column values in rows to be inserted into the table. The function may consist of any expression valid in MySQL that yields a nonnegative integer value.  
+With this type of partitioning, a partition is selected based on the value returned by a user-defined expression that operates on column values in rows to be inserted into the table. The function may consist of any expression valid in MySQL that yields a nonnegative integer value. 
+
+Example: 
+```
+CREATE TABLE employees_hash (
+    id INT NOT NULL,
+    fname VARCHAR(30),
+    lname VARCHAR(30),
+    hired DATE NOT NULL DEFAULT '1970-01-01',
+    separated DATE NOT NULL DEFAULT '9999-12-31',
+    job_code INT,
+    store_id INT
+)
+PARTITION BY HASH(store_id)
+PARTITIONS 4;
+```
+or even: 
+```
+CREATE TABLE employees_hash (
+    id INT NOT NULL,
+    fname VARCHAR(30),
+    lname VARCHAR(30),
+    hired DATE NOT NULL DEFAULT '1970-01-01',
+    separated DATE NOT NULL DEFAULT '9999-12-31',
+    job_code INT,
+    store_id INT
+)
+PARTITION BY HASH( YEAR(hired) )
+PARTITIONS 3;
+```
 
 ### KEY partitioning
-This type of partitioning is similar to partitioning by HASH, except that only one or more columns to be evaluated are supplied, and the MySQL server provides its own hashing function. These columns can contain other than integer values, since the hashing function supplied by MySQL guarantees an integer result regardless of the column data type. An extension to this type, LINEAR KEY, is also available. See Section 21.2.5, “KEY Partitioning”.
+This type of partitioning is similar to partitioning by HASH, except that only one or more columns to be evaluated are supplied, and the MySQL server provides its own hashing function. These columns can contain other than integer values, since the hashing function supplied by MySQL guarantees an integer result regardless of the column data type. 
+
+Example: 
+````
+CREATE TABLE keypart1 (
+    id INT NOT NULL PRIMARY KEY,
+    name VARCHAR(20)
+)
+PARTITION BY KEY()
+PARTITIONS 2;
+````
+If there is no primary key but there is a unique key, then the unique key is used for the partitioning key:
+````
+CREATE TABLE keypart2 (
+    id INT NOT NULL,
+    name VARCHAR(20),
+    UNIQUE KEY (id)
+)
+PARTITION BY KEY()
+PARTITIONS 2;
+````
+
+## Sub Partitions
+
+
+## Find partitions
+```
+select * from information_schema.partitions  
+where table_schema = '[DATABASE]'
+```

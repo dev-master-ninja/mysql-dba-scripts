@@ -73,7 +73,13 @@ see documentation [here](./replication/mysqld-modifications.md)
 ## Cluster
 Installing a MySQL Cluster on Linux ([Ubuntu](./cluster/README-ubuntu.md) and [RedHat](./cluster/README-redhat.md)) documentation and setup guide [here](./cluster/README.md)
   
-UPDATE: Added detailed installation instructions for [Galera Clustmanager](./cluster/README-galera.md)
+UPDATE: Added detailed installation instructions for [Galera Clustmanager](./cluster/README-galera.md).
 
 ## Upgrading to MySQL 8
-How to upgrade to [MySQL 8](./mysql-8/README.md)
+How to upgrade to [MySQL 8](./mysql-8/README.md).
+
+## Partitioning
+Add [partitions]('./partitioning/README.md) to tables.
+
+## Tablespaces
+Create [tablespaces]('./tablespaces/README.md)
