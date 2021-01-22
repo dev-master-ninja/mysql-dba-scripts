@@ -79,7 +79,7 @@ UPDATE: Added detailed installation instructions for [Galera Clustmanager](./clu
 How to upgrade to [MySQL 8](./mysql-8/README.md).
 
 ## Partitioning
-Add [partitions]('./partitioning/README.md) to tables.
+Add [partitions](./partitioning/README.md) to tables.
 
 ## Tablespaces
-Create [tablespaces]('./tablespaces/README.md)
+Create [tablespaces](./tablespaces/README.md)

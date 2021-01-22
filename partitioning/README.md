@@ -48,6 +48,9 @@ ALTER TABLE table_name ENGINE = INNODB;
 
 ## Partitioning Types
 
+**NOTE**
+>The primary key of partioned tables *in which form* should **ALWAYS** include the partion column!!
+
 ### RANGE partitioning
 This type of partitioning assigns rows to partitions based on column values falling within a given range. 
 
@@ -60,7 +63,7 @@ CREATE TABLE employees_range (
     hired DATE NOT NULL DEFAULT '1970-01-01',
     separated DATE NOT NULL DEFAULT '2021-12-31',
     job_code INT NOT NULL,
-    store_id INT NOT NULL
+    store_id INT NOT NULL,
 )
 PARTITION BY RANGE (store_id) (
     PARTITION p0 VALUES LESS THAN (6),
@@ -93,8 +96,10 @@ Example:
 <tr><td>South</td><td>7, 8, 15, 16</td></tr>
 </tbody>
 </table>
-The table definition could be: 
-````
+
+The table definition could be:  
+
+```
 CREATE TABLE employees_list (
     id INT NOT NULL,
     fname VARCHAR(30),
@@ -102,7 +107,7 @@ CREATE TABLE employees_list (
     hired DATE NOT NULL DEFAULT '1970-01-01',
     separated DATE NOT NULL DEFAULT '2050-12-31',
     job_code INT,
-    store_id INT
+    store_id INT   
 )
 PARTITION BY LIST(store_id) (
     PARTITION pNorth VALUES IN (3,5,6,9,17),
@@ -110,7 +115,7 @@ PARTITION BY LIST(store_id) (
     PARTITION pWest VALUES IN (4,12,13,14,18),
     PARTITION pCentral VALUES IN (7,8,15,16)
 );
-````
+```
 
 ### HASH partitioning
 With this type of partitioning, a partition is selected based on the value returned by a user-defined expression that operates on column values in rows to be inserted into the table. The function may consist of any expression valid in MySQL that yields a nonnegative integer value. 
@@ -131,6 +136,8 @@ PARTITIONS 4;
 ```
 or even: 
 ```
+drop table employees_hash;
+
 CREATE TABLE employees_hash (
     id INT NOT NULL,
     fname VARCHAR(30),
@@ -168,7 +175,29 @@ PARTITIONS 2;
 ````
 
 ## Sub Partitions
-
+You can further divide partitions into subpartitions: 
+```
+CREATE TABLE ts (
+    id INT, 
+    purchased DATE, 
+    PRIMARY KEY (id, purchased))
+    PARTITION BY RANGE( YEAR(purchased) )
+    SUBPARTITION BY HASH( TO_DAYS(purchased) ) (
+        PARTITION p0 VALUES LESS THAN (1990) (
+            SUBPARTITION s0,
+            SUBPARTITION s1
+        ),
+        PARTITION p1 VALUES LESS THAN (2000) (
+            SUBPARTITION s2,
+            SUBPARTITION s3
+        ),
+        PARTITION p2 VALUES LESS THAN MAXVALUE (
+            SUBPARTITION s4,
+            SUBPARTITION s5
+        )
+    );
+```    
+This is only feasible with extremely large tables.
 
 ## Find partitions
 ```
