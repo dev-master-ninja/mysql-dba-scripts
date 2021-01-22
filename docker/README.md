@@ -64,7 +64,7 @@ apt-get install docker-ce=<VERSION_STRING> docker-ce-cli=<VERSION_STRING> contai
 apt-get install docker-ce=5:20.10.2~3-0~ubuntu-bionic  docker-ce-cli=5:20.10.2~3-0~ubuntu-bionic  containerd.io
 ```
 
-Now you can start a container (or download an image if you have none):
+Now you can start a container (or download an image if you have none, you can find containers on https://hub.docker.com):
 
 ```bash
 docker run -it ubuntu bash
