@@ -161,6 +161,7 @@ If you did not configure the ufw firewall when setting up this server, you can s
 We’ll add rules to allow local incoming connections from all nodes:
 
 ```
+ufw allow from 37.128.150.177
 ufw allow from 37.128.150.147
 ufw allow from 37.128.150.252
 ufw allow from 185.57.8.218
