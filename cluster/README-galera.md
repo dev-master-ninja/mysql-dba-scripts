@@ -69,3 +69,53 @@ $ sudo systemctl restart apparmor
 ````
 
 ## Installing Galera Cluster
+
+>See: https://galeracluster.com/library/documentation/install-mysql.html
+
+or Debian and Debian-based Linux distributions, the procedure for adding a repository requires that you first install the Software Properties. The package names vary depending on the distribution. For Debian, at the command-line, execute the following command:
+
+```bash
+apt install python-software-properties
+````
+
+For Ubuntu or a distribution derived from Ubuntu, you would execute instead the following:
+
+```bash
+apt-get install software-properties-common
+```
+
+If your server uses a different Debian-based distribution, and neither of these commands work on your system, try consulting your distribution’s package listings for the appropriate package name.
+
+Once you have the Software Properties installed, you can then enable the Codership repository for your system. Start by adding the GnuPG key for the repository. This is done by executing the following from the command-line:
+```bash
+apt-key adv --keyserver keyserver.ubuntu.com --recv BC19D
+```
+
+
+Next, add the Codership repository to your sources list. Using a simple text editor, create file called, `galera.list` in the `/etc/apt/sources.list.d/ ` directory. 
+
+```bash
+vi /etc/apt/sources.list.d/galera.list
+```
+
+Add these lines to that file, with the necessary adjustments for the version used:
+
+```bash
+#Codership Repository (Galera Cluster for MySQL)
+deb https://releases.galeracluster.com/mysql-wsrep-VERSION/DIST RELEASE main
+deb https://releases.galeracluster.com/galera-3/DIST RELEASE main
+```
+In the example above, you would change the repository addresses. The VERSION should be set to MySQL-wsrep version you want to install. For example, it might be something like, 5.6. The DIST should be replaced with the name of the Linux distribution on the server. This could be ubuntu. Last, replace RELEASE with the distribution release (e.g., bionic).
+
+If you don’t know which release you have installed on your server, you can generally find this using the following `lsb_release -a` command. 
+
+``` 
+# Codership Repository (Galera Cluster for MySQL)
+deb https://releases.galeracluster.com/mysql-wsrep-5.7/ubuntu bionic main
+deb https://releases.galeracluster.com/galera-3/ubuntu bionic main
+```
+
+Galera can be install now: 
+```
+apt-get install galera-3 galera-arbitrator-3 mysql-wsrep-5.7
+```
