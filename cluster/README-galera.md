@@ -398,12 +398,12 @@ mysql -u root -p -e 'SELECT * FROM playground.equipment;'
 You will see the following output showing the two rows:
 ```
 Output
-   +----+-------+-------+--------+
-   | id | type  | quant | color  |
-   +----+-------+-------+--------+
-   |  1 | slide |     2 | blue   |
-   |  2 | swing |    10 | yellow |
-   +----+-------+-------+--------+
++----+-------+-------+--------+
+| id | type  | quant | color  |
++----+-------+-------+--------+
+|  1 | slide |     2 | blue   |
+|  2 | swing |    10 | yellow |
++----+-------+-------+--------+
 ```
 Again, you can add another value from this node:
 ```
@@ -421,13 +421,13 @@ mysql -u root -p -e 'SELECT * FROM playground.equipment;'
 You will see the following output, which indicates that the rows are available on the first node.
 ```
 Output
-   +----+--------+-------+--------+
-   | id | type   | quant | color  |
-   +----+--------+-------+--------+
-   |  1 | slide  |     2 | blue   |
-   |  2 | swing  |    10 | yellow |
-   |  3 | seesaw |     3 | green  |
-   +----+--------+-------+--------+
++----+--------+-------+--------+
+| id | type   | quant | color  |
++----+--------+-------+--------+
+|  1 | slide  |     2 | blue   |
+|  2 | swing  |    10 | yellow |
+|  3 | seesaw |     3 | green  |
++----+--------+-------+--------+
 ```
 
 You’ve now verified successfully that you can write to all of the nodes and that replication is being performed properly.
