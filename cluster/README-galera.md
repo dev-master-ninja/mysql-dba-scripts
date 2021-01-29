@@ -7,6 +7,7 @@
 > The scripts and commands in this repository come with **absolutely no warranty**. This information is purely designed and intended for **instructional purposes only**. 
 Any damage or loss of data when implementing these commands and scripts is the **sole responsibility of the user of the information listed here**.      
 
+<img src="./galera-architecture.png">
 
 ### (optional) Firewall Configuration
 You will need to update the firewall settings on each node so that they may communicate with the cluster. How you do this varies depending upon your distribution and the particular firewall software that you use.
@@ -23,26 +24,9 @@ ufw allow from 185.95.14.193
 
 > Warning The IP addresses in  the example are for demonstration purposes only. Use the real values from your nodes and netmask in the iptables configuration for your cluster. 
 
-### 3. (optional) Disabling AppArmor
-By default, some servers—for instance, Ubuntu—include AppArmor, which may prevent mysqld from opening additional ports or running scripts. You must disable AppArmor or configure it to allow mysqld to run external programs and open listen sockets on unprivileged ports.
 
-To disable AppArmor, run the following commands:
-````
-$ sudo ln -s /etc/apparmor.d/usr.sbin.mysqld /etc/apparmor.d/disable/usr.sbin.mysqld
-````
-You will then need to tell AppArmor to reload profile:
-````
-$ sudo apparmor_parser -R /etc/apparmor.d/usr.sbin.mysqld
-````
-In some cases you may also need to restart AppArmor. If your system uses init scripts, run the following command:
-````
-$ sudo service apparmor restart
-````
-If instead, your system uses systemd, run the following command instead:
-````
-$ sudo systemctl restart apparmor
-````
 ## Installing Galera Cluster
+
 ### Step 1 — Adding the MySQL Repositories to All Servers
 In this step, you will add the relevant MySQL and Galera package repositories to each of your three servers so that you will be able to install the right version of MySQL and Galera used in this tutorial.
 

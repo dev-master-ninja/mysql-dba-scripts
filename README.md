@@ -81,3 +81,4 @@ Installing a MySQL Cluster on Linux ([Ubuntu](./cluster/README-ubuntu.md) and [R
 3. Create [tablespaces](./tablespaces/README.md)
 4. Running MySQL 8 on [Docker](./docker/README.md)
 5. Configuring [Nagios](./scripts/nagios/README.md)
+6. Setting up a [Galera Cluster](./cluster/README-galera.md)
