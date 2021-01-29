@@ -4,7 +4,7 @@
 Custom checks for Nagios are quite easy to set up.
 When a functional Nagios environment is installed, a new check can be easily deployed. 
 
-## On the Client Server
+## On the Target Server
 On the target server create a (`bash`) script which returns an exit code in the range `0` to `3`. Where `0` is the equivalent of `Okay` and `3` being `Critical`:
 
 ```
