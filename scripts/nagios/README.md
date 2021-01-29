@@ -99,3 +99,10 @@ And restart the server:
 ```bash
 systemctl restart nagios
 ```
+
+You can check if the component works from the commandline: 
+```bash
+/usr/lib/nagios/plugins/check_nrpe -H server-b.dba-training.online -c mysql_check
+```
+
+Configuring the GUI is platform and version dependent.
