@@ -1,0 +1,7 @@
+#!/bin/bash
+
+## Check Script:
+/usr/bin/php /usr/lib/tools/check.php
+EXIT=$?
+
+exit $EXIT
