@@ -93,6 +93,16 @@ Run the following command on all three servers to install a version of MySQL pat
 apt install galera-3 mysql-wsrep-5.7
 ```
 
+> **NOTE**
+When an error (most likely this one: `dpkg-deb: error: paste subprocess was killed by signal (Broken pipe)`) occurs following workaround applies: 
+```bash
+$ dpkg -i --force-overwrite /var/cache/apt/archives/mysql-wsrep-common-5.7_5.7.32-25.24-1ubuntu18.04_amd64.deb 
+
+$ apt -f install
+```
+> probably will do the trick!
+
+
 You will be asked to confirm whether you would like to proceed with the installation. Enter Y to continue with the installation. During the installation, you will also be asked to set a password for the MySQL administrative user. Set a strong password and press ENTER to continue.
 
 Once MySQL is installed, you will disable the default AppArmor profile to ensure that Galera functions properly, as per the official Galera documentation. AppArmor is a kernel module for Linux that provides access control functionality for services through security profiles.
@@ -136,23 +146,25 @@ wsrep_provider=/usr/lib/galera/libgalera_smm.so
 
 # Galera Cluster Configuration
 wsrep_cluster_name="test_cluster"
-wsrep_cluster_address="gcomm://First_Node_IP,Second_Node_IP,Third_Node_IP"
+wsrep_cluster_address="gcomm://37.128.150.177,37.128.150.147,37.128.150.252"
 
 # Galera Synchronization Configuration
 wsrep_sst_method=rsync
 
 # Galera Node Configuration
-wsrep_node_address="This_Node_IP"
-wsrep_node_name="This_Node_Name"
+wsrep_node_address="37.128.150.177"
+wsrep_node_name="server-a"
 ``` 
-The first section modifies or re-asserts MySQL settings that will allow the cluster to function correctly. For example, Galera won’t work with MyISAM or similar non-transactional storage engines, and mysqld must not be bound to the IP address for localhost. You can learn about the settings in more detail on the Galera Cluster system configuration page.
-The “Galera Provider Configuration” section configures the MySQL components that provide a WriteSet replication API. This means Galera in your case, since Galera is a wsrep (WriteSet Replication) provider. You specify the general parameters to configure the initial replication environment. This doesn’t require any customization, but you can learn more about Galera configuration options in the documentation.
+- **The first section** modifies or re-asserts MySQL settings that will allow the cluster to function correctly. For example, Galera won’t work with MyISAM or similar non-transactional storage engines, and mysqld must not be bound to the IP address for localhost. You can learn about the settings in more detail on the [Galera Cluster system configuration page](http://www.codership.com/wiki/doku.php?id=galera_parameters).
 
-The “Galera Cluster Configuration” section defines the cluster, identifying the cluster members by IP address or resolvable domain name and creating a name for the cluster to ensure that members join the correct group. You can change the wsrep_cluster_name to something more meaningful than test_cluster or leave it as-is, but you must update wsrep_cluster_address with the private IP addresses of your three servers.
+- **The “Galera Provider Configuration” section** configures the MySQL components that provide a WriteSet replication API. This means Galera in your case, since Galera is a wsrep (WriteSet Replication) provider. You specify the general parameters to configure the initial replication environment. This doesn’t require any customization, but you can learn more about Galera configuration options in the documentation.
 
-The Galera Synchronization Configuration section defines how the cluster will communicate and synchronize data between members. This is used only for the state transfer that happens when a node comes online. For your initial setup, you are using rsync, because it’s commonly available and does what you’ll need for now.
+- **The “Galera Cluster Configuration” section** defines the cluster, identifying the cluster members by IP address or resolvable domain name and creating a name for the cluster to ensure that members join the correct group. You can change the `wsrep_cluster_name` to something more meaningful than `test_cluster` or leave it as-is, but you must update `wsrep_cluster_address` with the private IP addresses of your three servers.
 
-The Galera Node Configuration section clarifies the IP address and the name of the current server. This is helpful when trying to diagnose problems in logs and for referencing each server in multiple ways. The wsrep_node_address must match the address of the machine you’re on, but you can choose any name you want in order to help you identify the node in log files.
+- **The Galera Synchronization Configuration section** defines how the cluster will communicate and synchronize data between members. This is used only for the state transfer that happens when a node comes online. For your initial setup, you are using `rsync`, because it’s commonly available and does what you’ll need for now.
+
+- **The Galera Node Configuration section** clarifies the IP address and the name of the current server. This is helpful when trying to diagnose problems in logs and for referencing each server in multiple ways. The `wsrep_node_address` must match the address of the machine you’re on, but you can choose any name you want in order to help you identify the node in log files.
+
 When you are satisfied with your cluster configuration file, copy the contents into your clipboard, then save and close the file.
 
 Now that you have configured your first node successfully, you can move on to configuring the remaining nodes in the next section.
