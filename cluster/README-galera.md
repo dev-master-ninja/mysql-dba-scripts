@@ -178,13 +178,56 @@ Paste in the configuration you copied from the first node, then update the Galer
 
 `/etc/mysql/conf.d/galera.cnf` 
 
-```
-...
+```bash
+# Server B
+[mysqld]
+binlog_format=ROW
+default-storage-engine=innodb
+innodb_autoinc_lock_mode=2
+bind-address=0.0.0.0
+
+# Galera Provider Configuration
+wsrep_on=ON
+wsrep_provider=/usr/lib/galera/libgalera_smm.so
+
+# Galera Cluster Configuration
+wsrep_cluster_name="test_cluster"
+wsrep_cluster_address="gcomm://37.128.150.177,37.128.150.147,37.128.150.252"
+
+# Galera Synchronization Configuration
+wsrep_sst_method=rsync
+
 # Galera Node Configuration
-wsrep_node_address="This_Node_IP"
-wsrep_node_name="This_Node_Name"
+wsrep_node_address="37.128.150.147"
+wsrep_node_name="server-b"
 ```
- 
+
+```bash
+# Server C
+[mysqld]
+binlog_format=ROW
+default-storage-engine=innodb
+innodb_autoinc_lock_mode=2
+bind-address=0.0.0.0
+
+# Galera Provider Configuration
+wsrep_on=ON
+wsrep_provider=/usr/lib/galera/libgalera_smm.so
+
+# Galera Cluster Configuration
+wsrep_cluster_name="test_cluster"
+wsrep_cluster_address="gcomm://37.128.150.177,37.128.150.147,37.128.150.252"
+
+# Galera Synchronization Configuration
+wsrep_sst_method=rsync
+
+# Galera Node Configuration
+wsrep_node_address="37.128.150.252"
+wsrep_node_name="server-c"
+```
+
+
+
 Save and exit the file.
 
 Once you have completed these steps, repeat them on the third node.
