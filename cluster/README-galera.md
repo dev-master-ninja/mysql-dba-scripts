@@ -394,3 +394,8 @@ mysql> show tables;
 Now try and create or drop tables on every node in your cluster. 
 
 You’ve now verified successfully that you can write to all of the nodes and that replication is being performed properly.
+
+
+## Installing Galera Cluster Manager
+
+Refer to the [installation manual](https://galeracluster.com/library/documentation/gmd-install.html) for details
