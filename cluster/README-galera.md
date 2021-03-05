@@ -14,7 +14,7 @@ You will need to update the firewall settings on each node so that they may comm
 
 In general you can allow all traffic from systems/VPS's in your cluster:
 ```
-uwf allow from 37.128.150.177
+ufw allow from 37.128.150.177
 ufw allow from 37.128.150.147
 ufw allow from 37.128.150.252
 ufw allow from 185.57.8.218
