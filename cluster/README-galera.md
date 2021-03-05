@@ -13,13 +13,11 @@ Any damage or loss of data when implementing these commands and scripts is the *
 You will need to update the firewall settings on each node so that they may communicate with the cluster. How you do this varies depending upon your distribution and the particular firewall software that you use.
 
 In general you can allow all traffic from systems/VPS's in your cluster:
-```
+
+```bash
 ufw allow from 37.128.150.177
 ufw allow from 37.128.150.147
 ufw allow from 37.128.150.252
-ufw allow from 185.57.8.218
-ufw allow from 185.57.8.198
-ufw allow from 185.95.14.193
 ```
 
 > Warning The IP addresses in  the example are for demonstration purposes only. Use the real values from your nodes and netmask in the iptables configuration for your cluster. 
