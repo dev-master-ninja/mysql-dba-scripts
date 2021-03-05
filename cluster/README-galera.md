@@ -160,6 +160,16 @@ wsrep_node_name="server-a"
 
 - **The Galera Synchronization Configuration section** defines how the cluster will communicate and synchronize data between members. This is used only for the state transfer that happens when a node comes online. For your initial setup, you are using `rsync`, because it’s commonly available and does what you’ll need for now.
 
+Other possible sync features: 
+
+| Method | Speed | Blocks Donor | Live Node Availability | Type | DB Root Access |
+| ------ | ----- | ---------- | --- | ---- | ----- |
+| mysqldump | Slow | Blocks | Available | Logical | Donor and Joiner |
+| rsync | Faster | Blocks | Unavailable | Physical | none |
+| clone | Fastest | On DDLs | Unavailable | Physical | Only Donor |
+| xtrabackup | Fast | Briefly | Unavailable | Physical | Only Donor |
+
+
 - **The Galera Node Configuration section** clarifies the IP address and the name of the current server. This is helpful when trying to diagnose problems in logs and for referencing each server in multiple ways. The `wsrep_node_address` must match the address of the machine you’re on, but you can choose any name you want in order to help you identify the node in log files.
 
 When you are satisfied with your cluster configuration file, copy the contents into your clipboard, then save and close the file.
