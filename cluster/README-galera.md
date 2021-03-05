@@ -369,78 +369,20 @@ You’ve gone through the steps up to this point so that your cluster can perfor
 
 You’ll start by making database changes on your first node. The following commands will create a database called playground and a table inside of this database called equipment.
 ```bash
-mysql -u root -p -e 'CREATE DATABASE playground;
-CREATE TABLE playground.equipment ( id INT NOT NULL AUTO_INCREMENT, type VARCHAR(50), quant INT, color VARCHAR(25), PRIMARY KEY(id));
-INSERT INTO playground.equipment (type, quant, color) VALUES ("slide", 2, "blue");'
+git clone https://github.com/dev-master-ninja/mysql-dba-scripts.git
+
+mysql -u root -p [password] < mysql-dba-scripts/example-data/data.sql
 ``` 
 
 
-In the previous command, the CREATE DATABASE statement creates a database named playground. The CREATE statement creates a table named equipment inside the playground database having an auto-incrementing identifier column called id and other columns. The type column, quant column, and color column are defined to store the type, quantity, and color of the equipment respectively. The INSERT statement inserts an entry of type slide, quantity 2 and color blue.
-
-You now have one value in your table.
-
-Read and Write on the Second Node
-
+In the previous command, the script create a database named "online_data" and loads several tables into it.
 Next, look at the second node to verify that replication is working:
 
-mysql -u root -p -e 'SELECT * FROM playground.equipment;'
- 
-Copy
-The data you entered on the first node will be visible here on the second, proving that replication is working:
-```
-Output
-+----+-------+-------+-------+
-| id | type  | quant | color |
-+----+-------+-------+-------+
-|  1 | slide |     2 | blue  |
-+----+-------+-------+-------+
-```
-From this same node, write data to the cluster:
-
 ```bash
-mysql -u root -p -e 'INSERT INTO playground.equipment (type, quant, color) VALUES ("swing", 10, "yellow");'
-```
- 
-*Read and Write on the Third Node*
-
-From the third node, you can read all of this data by querying the table again:
-```
-mysql -u root -p -e 'SELECT * FROM playground.equipment;'
-``` 
-
-You will see the following output showing the two rows:
-```
-Output
-+----+-------+-------+--------+
-| id | type  | quant | color  |
-+----+-------+-------+--------+
-|  1 | slide |     2 | blue   |
-|  2 | swing |    10 | yellow |
-+----+-------+-------+--------+
-```
-Again, you can add another value from this node:
-```
-mysql -u root -p -e 'INSERT INTO playground.equipment (type, quant, color) VALUES ("seesaw", 3, "green");'
+mysql -u root -p 
+mysql> show tables;
 ```
 
-*Read on the First Node*
-
-Back on the first node, you can verify that your data is available everywhere:
-
-```
-mysql -u root -p -e 'SELECT * FROM playground.equipment;'
-``` 
-
-You will see the following output, which indicates that the rows are available on the first node.
-```
-Output
-+----+--------+-------+--------+
-| id | type   | quant | color  |
-+----+--------+-------+--------+
-|  1 | slide  |     2 | blue   |
-|  2 | swing  |    10 | yellow |
-|  3 | seesaw |     3 | green  |
-+----+--------+-------+--------+
-```
+Now try and create or drop tables on every node in your cluster. 
 
 You’ve now verified successfully that you can write to all of the nodes and that replication is being performed properly.
