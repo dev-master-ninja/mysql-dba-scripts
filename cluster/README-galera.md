@@ -57,7 +57,7 @@ vi /etc/apt/sources.list.d/galera.list
 
 In the text editor, add the following lines, which will make the appropriate repositories available to the APT package manager:
 ```bash
-/etc/apt/sources.list.d/galera.list
+# /etc/apt/sources.list.d/galera.list
 deb http://releases.galeracluster.com/mysql-wsrep-5.7/ubuntu bionic main
 deb http://releases.galeracluster.com/galera-3/ubuntu bionic main
 ``` 
@@ -70,8 +70,8 @@ vi /etc/apt/preferences.d/galera.pref
 ```
 
 Add the following lines to the text editor:
-```
-/etc/apt/preferences.d/galera.pref
+```bash
+# /etc/apt/preferences.d/galera.pref
 # Prefer Codership repository
 Package: *
 Pin: origin releases.galeracluster.com
@@ -79,8 +79,8 @@ Pin-Priority: 1001
 ``` 
 
 Save and close that file, then run the following command on each server in order to include package manifests from the new repositories:
-```
-sudo apt update
+```bash
+$ sudo apt update
 ```
 
 Now that you have successfully added the package repository on all three of your servers, you’re ready to install MySQL in the next section.
@@ -89,8 +89,8 @@ Now that you have successfully added the package repository on all three of your
 In this step, you will install the MySQL package on your three servers.
 
 Run the following command on all three servers to install a version of MySQL patched to work with Galera, as well as the Galera package.
-```
-apt install galera-3 mysql-wsrep-5.7
+```bash
+$ apt install galera-3 mysql-wsrep-5.7
 ```
 
 > **NOTE**
@@ -108,15 +108,15 @@ You will be asked to confirm whether you would like to proceed with the installa
 Once MySQL is installed, you will disable the default AppArmor profile to ensure that Galera functions properly, as per the official Galera documentation. AppArmor is a kernel module for Linux that provides access control functionality for services through security profiles.
 
 Disable AppArmor by executing the following on each server:
-```
-ln -s /etc/apparmor.d/usr.sbin.mysqld /etc/apparmor.d/disable/
+```bash
+$ ln -s /etc/apparmor.d/usr.sbin.mysqld /etc/apparmor.d/disable/
 ``` 
 
 This command adds a symbolic link of the MySQL profile to the disable directory, which disables the profile on boot.
 
 Then, run the following command to remove the MySQL definition that has already been loaded in the kernel.
-```
-apparmor_parser -R /etc/apparmor.d/usr.sbin.mysqld
+```bash
+$ apparmor_parser -R /etc/apparmor.d/usr.sbin.mysqld
 ``` 
 
 Once you have installed MySQL and disabled the AppArmor profile on your first server, repeat these steps for your other two servers.
@@ -127,13 +127,12 @@ Now that you have installed MySQL successfully on each of the three servers, you
 In this step you will configure your first node. Each node in the cluster needs to have a nearly identical configuration. Because of this, you will do all of the configuration on your first machine, and then copy it to the other nodes.
 
 By default, MySQL is configured to check the `/etc/mysql/conf.d` directory to get additional configuration settings from files ending in `.cnf`. On your first server, create a file in this directory with all of your cluster-specific directives:
-```
-vi /etc/mysql/conf.d/galera.cnf
+```bash
+$ vi /etc/mysql/conf.d/galera.cnf
 ```
 
 Add the following configuration into the file. The configuration specifies different cluster options, details about the current server and the other servers in the cluster, and replication-related settings. Note that the IP addresses in the configuration are the private addresses of your respective servers; replace the highlighted lines with the appropriate IP addresses.
-```
-/etc/mysql/conf.d/galera.cnf
+```bash
 [mysqld]
 binlog_format=ROW
 default-storage-engine=innodb
