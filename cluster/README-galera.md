@@ -7,7 +7,7 @@
 > The scripts and commands in this repository come with **absolutely no warranty**. This information is purely designed and intended for **instructional purposes only**. 
 Any damage or loss of data when implementing these commands and scripts is the **sole responsibility of the user of the information listed here**.      
 
-<img src="./galera-architecture.png">
+<img src="https://computingforgeeks.com/wp-content/uploads/2021/04/mariadb-galera-cluster-1024x545.png?ezimgfmt=ng:webp/ngcb23">
 
 ### (optional) Firewall Configuration
 You will need to update the firewall settings on each node so that they may communicate with the cluster. How you do this varies depending upon your distribution and the particular firewall software that you use.
