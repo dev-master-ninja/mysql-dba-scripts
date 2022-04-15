@@ -88,7 +88,7 @@ In this step, you will install the MySQL package on your three servers.
 
 Run the following command on all three servers to install a version of MySQL patched to work with Galera, as well as the Galera package.
 ```bash
-$ apt install galera-3 mysql-wsrep-5.7
+$ apt install mariadb-server mariadb-client
 ```
 
 > **NOTE**
